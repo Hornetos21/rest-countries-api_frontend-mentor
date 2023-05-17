@@ -1,4 +1,8 @@
-import styled from 'styled-components';
+import styled from 'styled-components'
+import { useDispatch, useSelector } from 'react-redux'
+import { selectNeighbors } from '../store/details/details-selector.js'
+import { useEffect } from 'react'
+import { loadNeighborsByBorder } from '../store/details/details-actions.js'
 
 const Wrapper = styled.section`
   margin-top: 3rem;
@@ -15,19 +19,19 @@ const Wrapper = styled.section`
   @media (min-width: 1024px) {
     grid-template-columns: minmax(400px, 600px) 1fr;
   }
-`;
+`
 
 const InfoImage = styled.img`
   display: block;
   width: 100%;
   height: 100%;
   object-fit: contain;
-`;
+`
 
 const InfoTitle = styled.h1`
   margin: 0;
   font-weight: var(--fw-normal);
-`;
+`
 
 const ListGroup = styled.div`
   display: flex;
@@ -39,13 +43,13 @@ const ListGroup = styled.div`
     flex-direction: row;
     gap: 4rem;
   }
-`;
+`
 
 const List = styled.ul`
   list-style: none;
   margin: 0;
   padding: 0;
-`;
+`
 
 const ListItem = styled.li`
   line-height: 1.8;
@@ -53,7 +57,7 @@ const ListItem = styled.li`
   & > b {
     font-weight: var(--fw-bold);
   }
-`;
+`
 
 const Meta = styled.div`
   margin-top: 3rem;
@@ -70,13 +74,13 @@ const Meta = styled.div`
     flex-direction: row;
     align-items: center;
   }
-`;
+`
 
 const TagGroup = styled.div`
   display: flex;
   gap: 1rem;
   flex-wrap: wrap;
-`;
+`
 
 const Tag = styled.span`
   padding: 0 1rem;
@@ -84,7 +88,7 @@ const Tag = styled.span`
   box-shadow: var(--shadow);
   line-height: 1.5;
   cursor: pointer;
-`;
+`
 
 export const Info = (props) => {
   const {
@@ -100,7 +104,15 @@ export const Info = (props) => {
     languages = [],
     borders = [],
     push,
-  } = props;
+  } = props
+  const dispatch = useDispatch()
+  const neighbors = useSelector(selectNeighbors)
+
+  useEffect(() => {
+    if (borders.length) {
+      dispatch(loadNeighborsByBorder(borders))
+    }
+  }, [borders, dispatch])
 
   return (
     <Wrapper>
@@ -153,9 +165,12 @@ export const Info = (props) => {
             <span>There is no border countries</span>
           ) : (
             <TagGroup>
-              {[].map((b) => (
-                <Tag key={b} onClick={() => push(`/country/${b}`)}>
-                  {b}
+              {neighbors.map((countryName) => (
+                <Tag
+                  key={countryName}
+                  onClick={() => push(`/country/${countryName}`)}
+                >
+                  {countryName}
                 </Tag>
               ))}
             </TagGroup>
@@ -163,5 +178,5 @@ export const Info = (props) => {
         </Meta>
       </div>
     </Wrapper>
-  );
-};
+  )
+}
