@@ -18,6 +18,9 @@ const InputContainer = styled.label`
     margin-bottom: 0;
     width: 280px;
   }
+  @media (min-width: 1024px) {
+    width: 480px;
+  }
 `
 
 const Input = styled.input.attrs({
@@ -27,9 +30,14 @@ const Input = styled.input.attrs({
   margin-left: 1.6rem;
   font-size: 12px;
   border: none;
-  outline: none;
+  outline: transparent;
   color: var(--color-text);
   background-color: var(--colors-ui-base);
+  width: 100%;
+
+  @media (min-width: 767px) {
+    font-size: 14px;
+  }
 `
 
 export const Search = () => {

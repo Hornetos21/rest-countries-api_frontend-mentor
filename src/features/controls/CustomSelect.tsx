@@ -68,4 +68,7 @@ export const CustomSelect = styled(MySelect).attrs({
   & > div[id] {
     background-color: var(--colors-ui-base);
   }
+  @media (min-width: 1024px) {
+    font-size: 14px;
+  }
 `

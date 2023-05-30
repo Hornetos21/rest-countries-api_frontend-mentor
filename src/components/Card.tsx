@@ -8,7 +8,12 @@ const Wrapper = styled.article`
   cursor: pointer;
   overflow: hidden;
   height: 335px;
-  //max-width: 264px;
+  transform: scale(1);
+  transition: transform 0.5s;
+
+  &:hover {
+    transform: scale(1.05);
+  }
 `
 
 const CardImage = styled.img`

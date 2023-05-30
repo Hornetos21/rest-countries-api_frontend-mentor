@@ -1,6 +1,7 @@
 import { Info } from './Info'
 import { useDetails } from './useDetails'
 import { NavigateFunction } from 'react-router-dom'
+import Spinner from '../../components/Spinner'
 
 interface Props {
   name?: string
@@ -11,7 +12,7 @@ const CountryDetail = ({ name = '', navigate }: Props) => {
 
   return (
     <>
-      {status === 'loading' && <h2>Loading...</h2>}
+      {status === 'loading' && <Spinner />}
       {error && <h2>{error}</h2>}
       {currentCountry && <Info push={navigate} {...currentCountry} />}
     </>

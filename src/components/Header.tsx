@@ -15,6 +15,10 @@ const Wrapper = styled.div`
   justify-content: space-between;
   align-items: center;
   padding: 1.9rem 0;
+
+  @media (min-width: 767px) {
+    padding: 1.4rem 0;
+  }
 `
 
 const Title = styled(Link).attrs({

@@ -3,17 +3,26 @@ import { IoArrowBack } from 'react-icons/io5'
 
 import { Button } from '../components/Button'
 import CountryDetail from '../features/details/CountryDetail'
+import styled from 'styled-components'
+
+const Wrapper = styled.div`
+  padding: 17px 12px;
+
+  @media (min-width: 767px) {
+    padding: 28px 0;
+  }
+`
 
 export const Details = () => {
   const navigate = useNavigate()
   const { name } = useParams()
 
   return (
-    <div style={{ padding: '17px 12px' }}>
+    <Wrapper>
       <Button onClick={() => navigate(-1)}>
-        <IoArrowBack /> Back
+        <IoArrowBack className="arrow-back" /> Back
       </Button>
       <CountryDetail name={name} navigate={navigate} />
-    </div>
+    </Wrapper>
   )
 }

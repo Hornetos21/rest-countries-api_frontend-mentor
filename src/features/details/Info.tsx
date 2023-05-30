@@ -7,16 +7,19 @@ const Wrapper = styled.section`
   margin-top: 4rem;
   width: 100%;
   display: grid;
-  grid-template-columns: 100%;
+  grid-template-columns: 320px;
   gap: 2.6rem;
+  justify-content: center;
 
   @media (min-width: 767px) {
     grid-template-columns: minmax(100px, 400px) 1fr;
     align-items: center;
-    gap: 5rem;
+    gap: 2rem;
   }
-  @media (min-width: 1024px) {
-    grid-template-columns: minmax(400px, 600px) 1fr;
+  @media (min-width: 1200px) {
+    margin-top: 5rem;
+    gap: 7.4rem;
+    grid-template-columns: minmax(400px, 560px) 1fr;
   }
 `
 
@@ -26,12 +29,26 @@ const InfoImage = styled.img`
   height: 100%;
   object-fit: cover;
   max-height: 229px;
-`
 
+  @media (min-width: 1200px) {
+    max-height: 400px;
+  }
+`
+const InfoContainer = styled.div`
+  @media (min-width: 1024px) {
+    height: 100%;
+    padding: 38px 0;
+  }
+`
 const InfoTitle = styled.h1`
   font-weight: var(--fw-bold);
   letter-spacing: -1px;
   margin-bottom: 21px;
+
+  @media (min-width: 1024px) {
+    margin-bottom: 30px;
+    font-size: 32px;
+  }
 `
 
 const ListGroup = styled.div`
@@ -42,7 +59,7 @@ const ListGroup = styled.div`
 
   @media (min-width: 1024px) {
     flex-direction: row;
-    gap: 4rem;
+    gap: 9.4rem;
   }
 `
 
@@ -60,6 +77,11 @@ const ListItem = styled.li`
   & > b {
     font-weight: var(--fw-normal);
   }
+
+  @media (min-width: 1024px) {
+    margin-bottom: 10px;
+    font-size: 16px;
+  }
 `
 
 const Meta = styled.div`
@@ -75,6 +97,7 @@ const Meta = styled.div`
   }
 
   @media (min-width: 767px) {
+    margin-top: 4rem;
     flex-direction: row;
     align-items: center;
   }
@@ -90,12 +113,12 @@ const Tag = styled.span`
   padding: 5px 0;
   font-size: 12px;
   background-color: var(--colors-ui-base);
-  box-shadow: rgba(149, 157, 165, 0.3) 0 0 4px;
+  box-shadow: var(--shadow);
   line-height: 1.5;
   cursor: pointer;
   text-align: center;
   width: 96px;
-  border-radius: 2px;
+  border-radius: var(--radii);
 `
 
 interface Props extends Country {
@@ -122,7 +145,7 @@ export const Info = (props: Props) => {
     <Wrapper>
       <InfoImage src={flags.svg} alt={flags.alt} />
 
-      <div>
+      <InfoContainer>
         <InfoTitle>{title}</InfoTitle>
         <ListGroup>
           <List>
@@ -160,12 +183,6 @@ export const Info = (props: Props) => {
             </ListItem>
             <ListItem>
               <b>Languages: </b> {<span>{languages.join(', ')}</span>}
-              {/*{languages.map((lang, i) => (
-                <span key={i}>
-                  {lang}
-                  {i === languages.length - 1 ? '' : ', '}
-                </span>
-              ))}*/}
             </ListItem>
           </List>
         </ListGroup>
@@ -186,7 +203,7 @@ export const Info = (props: Props) => {
             </TagGroup>
           )}
         </Meta>
-      </div>
+      </InfoContainer>
     </Wrapper>
   )
 }

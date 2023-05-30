@@ -11,6 +11,10 @@ const ModeSwitcher = styled.div`
   cursor: pointer;
   font-weight: var(--fw-bold);
   text-transform: capitalize;
+
+  @media (min-width: 767px) {
+    font-size: 16px;
+  }
 `
 
 const ThemeSwitcher = () => {
@@ -18,9 +22,9 @@ const ThemeSwitcher = () => {
   return (
     <ModeSwitcher onClick={toggleTheme}>
       {theme === 'light' ? (
-        <IoMoonOutline size="14px" />
+        <IoMoonOutline className="moon-outline" />
       ) : (
-        <IoMoon size="14px" />
+        <IoMoon className="moon" />
       )}{' '}
       <span style={{ marginLeft: '0.55rem' }}>
         {theme === 'light' ? 'Dark' : 'Light'} Mode

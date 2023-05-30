@@ -2,6 +2,7 @@ import { List } from '../../components/List'
 import { Card } from '../../components/Card'
 import { useNavigate } from 'react-router-dom'
 import { useCountries } from './useCountries'
+import Spinner from '../../components/Spinner'
 
 const CountriesList = () => {
   const navigate = useNavigate()
@@ -10,7 +11,7 @@ const CountriesList = () => {
   return (
     <>
       {error && <h2>Can't fetch data</h2>}
-      {status === 'loading' && <h2>Loading...</h2>}
+      {status === 'loading' && <Spinner />}
       {status === 'received' && (
         <List>
           {countries.map((c) => {

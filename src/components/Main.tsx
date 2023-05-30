@@ -6,7 +6,7 @@ const Wrapper = styled.main`
   padding: 1.4rem 0;
 
   @media (min-width: 767px) {
-    padding: 4rem 0;
+    padding: 3.4rem 0;
   }
 `
 type Props = {

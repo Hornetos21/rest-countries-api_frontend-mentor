@@ -16,7 +16,7 @@
     --fw-bold: 800;
 
     /* Other */
-    --radii: 0.2rem;
+    --radii: 0.4rem;
 }
 
 body[data-theme='dark'] {
@@ -24,7 +24,8 @@ body[data-theme='dark'] {
     --colors-bg: hsl(207, 26%, 17%);
     --colors-ui-base: hsl(209, 23%, 22%);
 
-    --shadow: rgba(245, 245, 245, 0.2) 0 0 8px;
+
+    --shadow: hsl(207deg 25.54% 13.06%) 0 0 10px;
 }
 
 body[data-theme='light'] {
@@ -32,7 +33,9 @@ body[data-theme='light'] {
     --colors-bg: hsl(0, 0%, 98%);
     --colors-ui-base: hsl(0, 0%, 100%);
 
-    --shadow: rgba(149, 157, 165, 0.2) 0px 8px 24px;
+
+
+    --shadow:  rgba(149, 157, 165, 0.3) 0 0 15px;
 }
 
 body {
@@ -41,4 +44,28 @@ body {
     color: var(--colors-text);
     font-weight: 300;
     background-color: var(--colors-bg);
+}
+
+.arrow-back {
+    height: 14px;
+    width: 14px;
+}
+
+@media (min-width: 767px) {
+    .arrow-back {
+        height: 20px;
+        width: 20px;
+    }
+}
+
+.moon-outline, .moon {
+    height: 14px;
+    width: 14px;
+}
+
+@media (min-width: 767px) {
+    .moon-outline, .moon {
+        height: 16px;
+        width: 16px;
+    }
 }
