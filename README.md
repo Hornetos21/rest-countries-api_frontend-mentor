@@ -28,8 +28,8 @@ Users should be able to:
 
 ### Links
 
-- [Solution URL](https://your-solution-url.com)
-- [Live Site URL](https://your-live-site-url.com)
+- [Solution URL](https://www.frontendmentor.io/solutions/countries-api-with-react-rtk-rtk-query-styled-components-g6tNH1JUTe)
+- [Live Site URL](https://rest-countries-api-frontend-mentor-zeta.vercel.app/)
 
 ## My process
 
