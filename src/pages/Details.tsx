@@ -2,8 +2,9 @@ import { useNavigate, useParams } from 'react-router-dom'
 import { IoArrowBack } from 'react-icons/io5'
 
 import { Button } from '../components/Button'
-import CountryDetail from '../features/details/CountryDetail'
+// import CountryDetail from '../features/details/CountryDetail'
 import styled from 'styled-components'
+import CountryDetail from '../features/details/CountryDetail'
 
 const Wrapper = styled.div`
   padding: 17px 12px;
@@ -13,7 +14,7 @@ const Wrapper = styled.div`
   }
 `
 
-export const Details = () => {
+const Details = () => {
   const navigate = useNavigate()
   const { name } = useParams()
 
@@ -26,3 +27,4 @@ export const Details = () => {
     </Wrapper>
   )
 }
+export default Details

@@ -1,11 +1,13 @@
+import { useMemo } from 'react'
+
 import { List } from '../../components/List'
 import { Card } from '../../components/Card'
 import { useNavigate } from 'react-router-dom'
 import Spinner from '../../components/Spinner'
-import { useGetAllCountiesQuery } from '../../services/api'
 import { selectControls } from '../controls/controls-selector'
+
 import { useAppSelector } from '../../store'
-import { useMemo } from 'react'
+import { useGetAllCountiesQuery } from '../../services/api'
 
 const CountriesList = () => {
   const navigate = useNavigate()
