@@ -1,20 +1,45 @@
 import { List } from '../../components/List'
 import { Card } from '../../components/Card'
 import { useNavigate } from 'react-router-dom'
-import { useCountries } from './useCountries'
 import Spinner from '../../components/Spinner'
+import { useGetAllCountiesQuery } from '../../services/api'
+import { selectControls } from '../controls/controls-selector'
+import { useAppSelector } from '../../store'
+import { useMemo } from 'react'
 
 const CountriesList = () => {
   const navigate = useNavigate()
-  const { status, countries, error } = useCountries()
+  const { search = '', region = '' } = useAppSelector(selectControls)
+  const {
+    data: countries = [],
+    isSuccess,
+    isLoading,
+    isError,
+  } = useGetAllCountiesQuery()
+  const visibleCountries = useMemo(() => {
+    return countries
+      .filter(
+        (country) =>
+          country.name.common.toLowerCase().includes(search.toLowerCase()) &&
+          country.region.includes(region)
+      )
+      .sort((a, b) => (a.name.common > b.name.common ? 1 : -1))
+  }, [search, countries, region])
+  /*const visibleCountries = countries
+    .filter(
+      (country) =>
+        country.name.common.toLowerCase().includes(search.toLowerCase()) &&
+        country.region.includes(region)
+    )
+    .sort((a, b) => (a.name.common > b.name.common ? 1 : -1))*/
 
   return (
     <>
-      {error && <h2>Can't fetch data</h2>}
-      {status === 'loading' && <Spinner />}
-      {status === 'received' && (
+      {isError && <h2>Can't fetch data </h2>}
+      {isLoading && <Spinner />}
+      {isSuccess && (
         <List>
-          {countries.map((c) => {
+          {visibleCountries.map((c) => {
             const countryInfo = {
               img: c.flags.svg,
               name: c.name.common,

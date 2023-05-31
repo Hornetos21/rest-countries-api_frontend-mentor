@@ -1,33 +1,21 @@
 import { configureStore } from '@reduxjs/toolkit'
-import axios from 'axios'
 import { themeReducer } from './features/theme/theme-slice'
 import { controlsReducer } from './features/controls/controls-slice'
-import { countriesReducer } from './features/countries/countries-slice'
-import { detailsReducer } from './features/details/details-slice'
-
-import * as api from './config'
-import { useDispatch } from 'react-redux'
+import { TypedUseSelectorHook, useDispatch, useSelector } from 'react-redux'
+import { countriesApi } from './services/api'
 
 export const store = configureStore({
   reducer: {
     theme: themeReducer,
     controls: controlsReducer,
-    countries: countriesReducer,
-    details: detailsReducer,
+    [countriesApi.reducerPath]: countriesApi.reducer,
   },
   devTools: true,
   middleware: (getDefaultMiddleware) =>
-    getDefaultMiddleware({
-      thunk: {
-        extraArgument: {
-          client: axios,
-          api,
-        },
-      },
-      serializableCheck: false,
-    }),
+    getDefaultMiddleware().concat(countriesApi.middleware),
 })
 
 export type RootState = ReturnType<typeof store.getState>
 export type AppDispatch = typeof store.dispatch
 export const useAppDispatch: () => AppDispatch = useDispatch
+export const useAppSelector: TypedUseSelectorHook<RootState> = useSelector

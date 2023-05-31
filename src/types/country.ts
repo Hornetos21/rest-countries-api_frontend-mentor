@@ -32,7 +32,9 @@ export type Country = {
   languages: Language
   borders: string[]
 }
-
+export type CountryByName = {
+  '0': Country
+}
 type Info = {
   title: string
   description: string | string[]

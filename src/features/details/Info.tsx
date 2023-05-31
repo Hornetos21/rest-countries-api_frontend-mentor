@@ -1,7 +1,7 @@
 import styled from 'styled-components'
 import { Country } from 'types'
 import { NavigateFunction } from 'react-router-dom'
-import { useNeighbors } from './useNeighbors'
+import { useGetCountriesByCodeQuery } from '../../services/api'
 
 const Wrapper = styled.section`
   margin-top: 4rem;
@@ -125,7 +125,8 @@ interface Props extends Country {
   push: NavigateFunction
 }
 export const Info = (props: Props) => {
-  const nativeName = Object.entries(props.name.nativeName)[0][1].common
+  const arrNativeName = Object.entries(props.name.nativeName)
+  const nativeName = arrNativeName.length ? arrNativeName[0][1].common : ''
   const title = props.name.common
   const languages = Object.values(props.languages)
   const {
@@ -139,7 +140,9 @@ export const Info = (props: Props) => {
     borders = [],
     push,
   } = props
-  const neighbors = useNeighbors(borders)
+  // const neighbors = useNeighbors(borders)
+
+  const { data: neighbors = [] } = useGetCountriesByCodeQuery(borders)
 
   return (
     <Wrapper>
@@ -194,10 +197,10 @@ export const Info = (props: Props) => {
             <TagGroup>
               {neighbors.map((countryName) => (
                 <Tag
-                  key={countryName}
-                  onClick={() => push(`/country/${countryName}`)}
+                  key={countryName.name.common}
+                  onClick={() => push(`/country/${countryName.name.common}`)}
                 >
-                  {countryName}
+                  {countryName.name.common}
                 </Tag>
               ))}
             </TagGroup>
